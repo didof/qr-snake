@@ -36,6 +36,7 @@ async function build() {
         console.log(`[2/3] URL-encoding and creating Data URL...`);
         const encodedContent = encodeURIComponent(minifiedHtml);
         const dataUrl = `data:text/html;charset=UTF-8,${encodedContent}`;
+        console.log(dataUrl)
         
         const finalSize = dataUrl.length;
         console.log(`Final payload size for QR Code: ${finalSize} characters.`);
@@ -46,7 +47,7 @@ async function build() {
 
         console.log(`[3/3] Creating QR code image...`);
         await QRCode.toFile(qrCodeFile, dataUrl, {
-            errorCorrectionLevel: 'L', // Low ECC for maximum data capacity
+            errorCorrectionLevel: 'M', // Low ECC for maximum data capacity
         });
 
         console.log(`\nProcess complete. QR code saved to "${qrCodeFile}"`);

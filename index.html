@@ -1,39 +1,41 @@
-<canvas id="c"></canvas>
-<script>
-  x = c.getContext("2d");
-  S = G = 20;
-  c.width = c.height = S * G;
-  p = [{ x: S / 2, y: S / 2 }];
-  d = { x: 1, y: 0 };
-  F = () => {
-    f = { x: ~~(Math.random() * G), y: ~~(Math.random() * G) };
-    p.map((e) => e.x == f.x && e.y == f.y && F());
-  };
-  D = () => {
-    x.fillStyle = "black";
-    x.fillRect(0, 0, c.width, c.height);
-    x.fillStyle = "lime";
-    p.map((e) => x.fillRect(e.x * S, e.y * S, S - 1, S - 1));
-    x.fillStyle = "red";
-    x.fillRect(f.x * S, f.y * S, S - 1, S - 1);
-  };
-  (L = () => {
-    h = { x: p[0].x + d.x, y: p[0].y + d.y };
-    h.x = (h.x + G) % G;
-    h.y = (h.y + G) % G;
-    p.map((e) => e.x == h.x && e.y == h.y).includes(true) && p.splice(1);
-    p.unshift(h);
-    if (h.x == f.x && h.y == f.y) F();
-    else p.pop();
-    D();
-  }),
-    (onkeydown = (e) => {
-      k = e.keyCode;
-      k == 37 && d.x == 0 && (d = { x: -1, y: 0 });
-      k == 38 && d.y == 0 && (d = { x: 0, y: -1 });
-      k == 39 && d.x == 0 && (d = { x: 1, y: 0 });
-      k == 40 && d.y == 0 && (d = { x: 0, y: 1 });
-    });
-  F();
-  setInterval(L, 100);
-</script>
+<body style="background: black; display: grid; place-content: center">
+  <canvas id="c" style="border: 4px solid white"></canvas>
+  <script>
+    x = c.getContext("2d");
+    S = G = 20;
+    c.width = c.height = S * G;
+    p = [{ x: S / 2, y: S / 2 }];
+    d = { x: 1, y: 0 };
+    F = () => {
+      f = { x: ~~(Math.random() * G), y: ~~(Math.random() * G) };
+      p.map((e) => e.x == f.x && e.y == f.y && F());
+    };
+    D = () => {
+      x.fillStyle = "black";
+      x.fillRect(0, 0, c.width, c.height);
+      x.fillStyle = "lime";
+      p.map((e) => x.fillRect(e.x * S, e.y * S, S - 1, S - 1));
+      x.fillStyle = "red";
+      x.fillRect(f.x * S, f.y * S, S - 1, S - 1);
+    };
+    (L = () => {
+      h = { x: p[0].x + d.x, y: p[0].y + d.y };
+      h.x = (h.x + G) % G;
+      h.y = (h.y + G) % G;
+      p.map((e) => e.x == h.x && e.y == h.y).includes(true) && p.splice(1);
+      p.unshift(h);
+      if (h.x == f.x && h.y == f.y) F();
+      else p.pop();
+      D();
+    }),
+      (onkeydown = (e) => {
+        k = e.keyCode;
+        k == 37 && d.x == 0 && (d = { x: -1, y: 0 });
+        k == 38 && d.y == 0 && (d = { x: 0, y: -1 });
+        k == 39 && d.x == 0 && (d = { x: 1, y: 0 });
+        k == 40 && d.y == 0 && (d = { x: 0, y: 1 });
+      });
+    F();
+    setInterval(L, 100);
+  </script>
+</body>
